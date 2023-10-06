@@ -1,4 +1,4 @@
 {
-  "main": "dist/changesets-cli-commit.cjs.js",
-  "module": "dist/changesets-cli-commit.esm.js"
+  "main": "dist/martines3000-changesets-cli-commit.cjs.js",
+  "module": "dist/martines3000-changesets-cli-commit.esm.js"
 }
