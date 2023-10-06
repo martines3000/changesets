@@ -1,10 +1,10 @@
 ---
 "@changesets/get-version-range-type": minor
-"@changesets/assemble-release-plan": major
+"@martines3000/assemble-release-plan": major
 "@changesets/get-dependents-graph": major
 "@changesets/apply-release-plan": major
 "@changesets/changelog-github": minor
-"@changesets/get-release-plan": major
+"@martines3000/get-release-plan": major
 "@changesets/get-github-info": minor
 "@changesets/changelog-git": minor
 "@changesets/release-utils": minor
@@ -15,7 +15,7 @@
 "@changesets/types": major
 "@changesets/write": minor
 "@changesets/read": minor
-"@changesets/cli": minor
+"@martines3000/cli": minor
 "@changesets/git": major
 "@changesets/pre": major
 ---
