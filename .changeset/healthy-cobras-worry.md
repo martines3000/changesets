@@ -15,7 +15,7 @@
 "@changesets/types": major
 "@changesets/write": minor
 "@changesets/read": minor
-"@martines3000/cli": minor
+"@martines3000/changesets-cli": minor
 "@changesets/git": major
 "@changesets/pre": major
 ---
