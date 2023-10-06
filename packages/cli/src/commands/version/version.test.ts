@@ -2179,7 +2179,7 @@ describe("pre", () => {
     ]);
   });
   // https://github.com/changesets/changesets/pull/382#discussion_r434434182
-  it("should bump patch version for packages that had prereleases, but caret dependencies are still in range", async () => {
+  it("[custom]-[updated]: should bump patch version for packages that had prereleases, but caret dependencies are still in range", async () => {
     let cwd = await testdir({
       "package.json": JSON.stringify({
         private: true,
@@ -2223,16 +2223,201 @@ describe("pre", () => {
     ]);
 
     await pre(cwd, { command: "exit" });
+    await version(cwd, defaultOptions, {
+      ...modifiedDefaultConfig,
+    });
+
+    packages = (await getPackages(cwd))!;
+
+    expect(packages.packages.map((x) => x.packageJson)).toEqual([
+      {
+        dependencies: {
+          "pkg-b": "^1.0.1-next.0",
+        },
+        name: "pkg-a",
+        version: "1.0.1-next.0",
+      },
+      {
+        name: "pkg-b",
+        version: "1.0.1",
+      },
+    ]);
+
+    await pre(cwd, { command: "enter", tag: "next" });
+
+    await writeChangeset(
+      {
+        releases: [{ name: "pkg-b", type: "patch" }],
+        summary: "a very useful summary for the first change",
+      },
+      cwd
+    );
+    await version(cwd, defaultOptions, modifiedDefaultConfig);
+    packages = (await getPackages(cwd))!;
+
+    expect(packages.packages.map((x) => x.packageJson)).toEqual([
+      {
+        dependencies: {
+          "pkg-b": "^1.0.2-next.0",
+        },
+        name: "pkg-a",
+        version: "1.0.1-next.1",
+      },
+      {
+        name: "pkg-b",
+        version: "1.0.2-next.0",
+      },
+    ]);
+  });
+
+  it("[custom]-[fixed version]: should bump patch version for packages that had prereleases, but caret dependencies are still in range", async () => {
+    let cwd = await testdir({
+      "package.json": JSON.stringify({
+        private: true,
+        workspaces: ["packages/*"],
+      }),
+      "packages/pkg-a/package.json": JSON.stringify({
+        name: "pkg-a",
+        version: "1.0.0",
+        dependencies: {
+          "pkg-b": "1.0.0",
+        },
+      }),
+      "packages/pkg-b/package.json": JSON.stringify({
+        name: "pkg-b",
+        version: "1.0.0",
+      }),
+    });
+    await pre(cwd, { command: "enter", tag: "next" });
+    await writeChangeset(
+      {
+        releases: [{ name: "pkg-b", type: "patch" }],
+        summary: "a very useful summary for the first change",
+      },
+      cwd
+    );
+    await version(cwd, defaultOptions, modifiedDefaultConfig);
+
+    let packages = (await getPackages(cwd))!;
+
+    expect(packages.packages.map((x) => x.packageJson)).toEqual([
+      {
+        dependencies: {
+          "pkg-b": "1.0.1-next.0",
+        },
+        name: "pkg-a",
+        version: "1.0.1-next.0",
+      },
+      {
+        name: "pkg-b",
+        version: "1.0.1-next.0",
+      },
+    ]);
+
+    await pre(cwd, { command: "exit" });
+    await version(cwd, defaultOptions, modifiedDefaultConfig);
+
+    packages = (await getPackages(cwd))!;
+
+    expect(packages.packages.map((x) => x.packageJson)).toEqual([
+      {
+        dependencies: {
+          "pkg-b": "1.0.1",
+        },
+        name: "pkg-a",
+        version: "1.0.1",
+      },
+      {
+        name: "pkg-b",
+        version: "1.0.1",
+      },
+    ]);
+  });
+
+  it("[custom]-[fixed version with ignore]: should bump patch version for packages that had prereleases, but caret dependencies are still in range", async () => {
+    let cwd = await testdir({
+      "package.json": JSON.stringify({
+        private: true,
+        workspaces: ["packages/*"],
+      }),
+      "packages/pkg-a/package.json": JSON.stringify({
+        name: "pkg-a",
+        version: "1.0.0",
+        dependencies: {
+          "pkg-b": "1.0.0",
+        },
+      }),
+      "packages/pkg-b/package.json": JSON.stringify({
+        name: "pkg-b",
+        version: "1.0.0",
+      }),
+    });
+    await pre(cwd, { command: "enter", tag: "next" });
+    await writeChangeset(
+      {
+        releases: [{ name: "pkg-b", type: "patch" }],
+        summary: "a very useful summary for the first change",
+      },
+      cwd
+    );
+    await version(cwd, defaultOptions, modifiedDefaultConfig);
+
+    let packages = (await getPackages(cwd))!;
+
+    expect(packages.packages.map((x) => x.packageJson)).toEqual([
+      {
+        dependencies: {
+          "pkg-b": "1.0.1-next.0",
+        },
+        name: "pkg-a",
+        version: "1.0.1-next.0",
+      },
+      {
+        name: "pkg-b",
+        version: "1.0.1-next.0",
+      },
+    ]);
+
+    await pre(cwd, { command: "exit" });
+    await version(cwd, defaultOptions, {
+      ...modifiedDefaultConfig,
+      ignore: ["pkg-a"],
+    });
+
+    packages = (await getPackages(cwd))!;
+
+    expect(packages.packages.map((x) => x.packageJson)).toEqual([
+      {
+        dependencies: {
+          "pkg-b": "1.0.1",
+        },
+        name: "pkg-a",
+        version: "1.0.1-next.0",
+      },
+      {
+        name: "pkg-b",
+        version: "1.0.1",
+      },
+    ]);
+
+    await pre(cwd, { command: "enter", tag: "next" });
+    await writeChangeset(
+      {
+        releases: [{ name: "pkg-a", type: "patch" }],
+        summary: "a very useful summary for the first change",
+      },
+      cwd
+    );
     await version(cwd, defaultOptions, modifiedDefaultConfig);
 
     packages = (await getPackages(cwd))!;
     expect(packages.packages.map((x) => x.packageJson)).toEqual([
       {
         dependencies: {
-          "pkg-b": "^1.0.1",
+          "pkg-b": "1.0.1",
         },
         name: "pkg-a",
-        version: "1.0.1",
+        version: "1.0.1-next.1",
       },
       {
         name: "pkg-b",

@@ -215,14 +215,17 @@ function assembleReleasePlan(
       // Detailed explanation at https://github.com/changesets/changesets/pull/382#discussion_r434434182
       if (preInfo.preVersions.get(pkg.packageJson.name) !== 0) {
         const existingRelease = releases.get(pkg.packageJson.name);
-        if (!existingRelease) {
-          releases.set(pkg.packageJson.name, {
-            name: pkg.packageJson.name,
-            type: "patch",
-            oldVersion: pkg.packageJson.version,
-            changesets: [],
-          });
-        } else if (
+        // [martines3000]:We don't want this behaviour in our workflows
+        // if (!existingRelease) {
+        //   releases.set(pkg.packageJson.name, {
+        //     name: pkg.packageJson.name,
+        //     type: "patch",
+        //     oldVersion: pkg.packageJson.version,
+        //     changesets: [],
+        //   });
+        // }
+        if (
+          existingRelease &&
           existingRelease.type === "none" &&
           !refinedConfig.ignore.includes(pkg.packageJson.name)
         ) {
