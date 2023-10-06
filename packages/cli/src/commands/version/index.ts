@@ -5,7 +5,7 @@ import { log, warn, error } from "@changesets/logger";
 import { Config } from "@changesets/types";
 import applyReleasePlan from "@changesets/apply-release-plan";
 import readChangesets from "@changesets/read";
-import assembleReleasePlan from "@changesets/assemble-release-plan";
+import assembleReleasePlan from "@martines3000/assemble-release-plan";
 import { getPackages } from "@manypkg/get-packages";
 
 import { removeEmptyFolders } from "../../utils/v1-legacy/removeFolders";

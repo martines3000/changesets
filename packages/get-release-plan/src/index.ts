@@ -1,4 +1,4 @@
-import assembleReleasePlan from "@changesets/assemble-release-plan";
+import assembleReleasePlan from "@martines3000/assemble-release-plan";
 import readChangesets from "@changesets/read";
 import { read } from "@changesets/config";
 import { Config, ReleasePlan } from "@changesets/types";
