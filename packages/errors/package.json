@@ -1,6 +1,7 @@
 {
   "name": "@changesets/errors",
   "version": "0.1.4",
+  "private": true,
   "description": "Error classes for @changesets",
   "main": "dist/changesets-errors.cjs.js",
   "module": "dist/changesets-errors.esm.js",

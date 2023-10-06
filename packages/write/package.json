@@ -1,5 +1,6 @@
 {
   "name": "@changesets/write",
+  "private": true,
   "version": "0.2.3",
   "description": "Writes a changeset to a file",
   "main": "dist/changesets-write.cjs.js",
