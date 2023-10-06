@@ -84,7 +84,7 @@ ${format("", err).replace(process.cwd(), "<cwd>")}
 
 - @changesets/cli@${
         // eslint-disable-next-line import/no-extraneous-dependencies
-        require("@changesets/cli/package.json").version
+        require("@martines3000/changesets-cli/package.json").version
       }
 - node@${process.version}
 
