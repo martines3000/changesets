@@ -1,7 +1,7 @@
 {
   "name": "@changesets/types",
   "private": true,
-  "version": "5.2.1",
+  "version": "6.0.0",
   "description": "Common types shared between changeset packages",
   "main": "dist/changesets-types.cjs.js",
   "module": "dist/changesets-types.esm.js",
