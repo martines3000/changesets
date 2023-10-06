@@ -10,7 +10,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   release:
     name: Release
-    if: github.repository == 'changesets/changesets'
+    if: github.repository == 'martines3000/changesets'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
