@@ -1,5 +1,22 @@
 # @changesets/assemble-release-plan
 
+## 6.0.0
+
+### Major Changes
+
+- [#1185](https://github.com/changesets/changesets/pull/1185) [`a971652`](https://github.com/changesets/changesets/commit/a971652ec1403aab3fb89eb2f1640bd5012b895a) Thanks [@Andarist](https://github.com/Andarist)! - `package.json#exports` have been added to limit what (and how) code might be imported from the package.
+
+### Minor Changes
+
+- [`b636ce9`](https://github.com/changesets/changesets/commit/b636ce90095cb60a3a02e3e4a8b199b5125cdca5) Thanks [@martines3000](https://github.com/martines3000)! - Update exit mode behaviour
+
+### Patch Changes
+
+- Updated dependencies [[`a971652`](https://github.com/changesets/changesets/commit/a971652ec1403aab3fb89eb2f1640bd5012b895a)]:
+  - @changesets/get-dependents-graph@2.0.0
+  - @changesets/errors@0.2.0
+  - @changesets/types@6.0.0
+
 ## 5.2.4
 
 ### Patch Changes
